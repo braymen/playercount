@@ -2,10 +2,15 @@ import express, { Request, Response } from 'express'
 import http from 'http'
 import { Server } from 'socket.io'
 
+const allowedOrigins = (process.env.ALLOWED_ORIGINS ?? 'http://localhost:5173,https://braymen.github.io,https://idleward.com')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean)
+
 const port = Number(process.env.PORT ?? 3000)
 const app = express()
 const server = http.createServer(app)
-const io = new Server(server)
+const io = new Server(server, { cors: { origin: allowedOrigins } })
 
 app.use(express.json())
 
