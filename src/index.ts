@@ -48,8 +48,6 @@ io.on('connection', (socket) => {
         io.to(gameId).emit('playerCount', { gameId, count: getUserCountByGame(gameId) - 1 })
     })
 })
-// UI Usage: io(url, { auth: { gameId: 'game name' } })
-// Player Count: socket.on('playerCount', (data) => {})
 
 server.listen(port, () => {
     console.log(`Listening on http://localhost:${port}`)
